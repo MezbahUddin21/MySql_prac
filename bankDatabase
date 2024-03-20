@@ -1,1 +1,11 @@
 
+create database bank;
+create table branch(branch_name varchar(10), branch_city varchar(10), assets int);
+
+create table customer(customer_id int PRIMARY key,
+                      customer_name varchar(20),customer_city varchar(10));
+create table account (account_number int primary key,
+                      branch_name varchar(10),
+                      balance int );
+create table loan ( loan_number int PRIMARY key, branch_name varchar(15),
+                   amount int);
