@@ -1,1 +1,48 @@
+INSERT INTO branch(branch_name, branch_city, assets) VALUES
+('Branch1', 'City1', 100000),
+('Branch2', 'City2', 150000),
+('Branch3', 'City3', 200000),
+('Branch4', 'City4', 120000),
+('Branch5', 'City5', 180000);
+
+INSERT INTO customer(customer_id, customer_name, customer_city) VALUES
+(1, 'John Doe', 'City1'),
+(2, 'Jane Smith', 'City2'),
+(3, 'Alice Johnson', 'City3'),
+(4, 'Bob Brown', 'City4'),
+(5, 'Emma Davis', 'City5');
+
+INSERT INTO account(account_number, branch_name, balance) VALUES
+(101, 'Branch1', 50000),
+(102, 'Branch2', 75000),
+(103, 'Branch3', 60000),
+(104, 'Branch4', 90000),
+(105, 'Branch5', 80000);
+INSERT INTO loan(loan_number, branch_name, amount) VALUES
+(1001, 'Branch1', 20000),
+(1002, 'Branch2', 30000),
+(1003, 'Branch3', 25000),
+(1004, 'Branch4', 18000),
+(1005, 'Branch5', 22000);
+
+INSERT INTO depositor(customer_name, account_number) VALUES
+('John Doe', 101),
+('Jane Smith', 102),
+('Alice Johnson', 103),
+('Bob Brown', 104),
+('Emma Davis', 105);
+
+INSERT INTO borrower(customer_name, account_number) VALUES
+('John Doe', 101),
+('Jane Smith', 102),
+('Alice Johnson', 103),
+('Bob Brown', 104),
+('Emma Davis', 105);
+
+
+select DISTINCT c.customer_id, c.customer_name, c.customer_city
+FROM customer c
+JOIN borrower b ON c.customer_name = b.customer_name
+JOIN loan l ON b.account_number = l.loan_number
+WHERE l.amount between 30000 and 50000;
 
