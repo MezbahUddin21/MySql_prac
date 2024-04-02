@@ -18,3 +18,19 @@ create table borrower(
     customer_name varchar(20),
     loan_number int,
 	FOREIGN key (loan_number) REFERENCES loan(loan_number));
+
+select DISTINCT c.customer_id
+FROM customer c
+join depositor d on c.customer_id = d.customer_id
+join account a ON d.account_number = a.account_number
+JOIN loan l ON a.branch_name = l.branch_name
+WHERE l.amount between 30000 and 50000;
+
+SELECT branch_name
+FROM branch
+WHERE branch_name BETWEEN 'Branch2' AND 'Branch4';
+SELECT DISTINCT borrower.customer_name
+FROM borrower
+JOIN customer ON borrower.customer_name = customer.customer_name
+WHERE borrower.customer_name LIKE '%J%' OR borrower.customer_name LIKE 'M%';
+
