@@ -58,6 +58,16 @@ FROM employee
 INNER JOIN client ON employee.empID = client.clientID
 INNER JOIN project ON client.empID = project.projectID
 ;
+SELECT employee.empID, employee.empFname, client.clientID, client.clientEmailID, project.projectName
+FROM employee
+left JOIN client ON employee.empID = client.clientID
+left JOIN project ON client.empID = project.projectID
+;
 
+SELECT employee.empID, employee.empFname, client.clientID, client.clientEmailID, project.projectName
+FROM employee
+right JOIN client ON employee.empID = client.clientID
+right JOIN project ON client.empID = project.projectID
+;
 
 
