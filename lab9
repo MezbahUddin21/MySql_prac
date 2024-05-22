@@ -1,0 +1,56 @@
+DROP DATABASE IF EXISTS lab9;
+CREATE DATABASE lab9;
+USE lab9;
+
+
+CREATE TABLE employee (
+    emp_id		INT			NOT NULL,
+    emp_name	VARCHAR(30)	NOT NULL,
+    salary	DOUBLE		NOT NULL,
+    start_date		DATE,
+    noof_pub	INT        NOT NULL,
+    job_d       INT        NOT NULL,
+    PRIMARY KEY (emp_id)
+);
+
+
+
+DELIMITER $$
+
+
+-- BEFORE UPDATE Trigger
+CREATE TRIGGER beforeInsertTrigger before insert ON employee FOR EACH ROW
+    BEGIN
+        -- Ensure the salary is at least 1500.00 before updating
+        IF new.job_d > 1 and new.noof_pub >4 THEN SET NEW.salary = new.salary+(new.salary/100)*20;
+        end if;
+        IF new.job_d > 1 and new.noof_pub >3 THEN SET NEW.salary = new.salary+(new.salary/100)*10;
+        end if;
+        IF new.job_d > 1 and new.noof_pub >1 THEN SET NEW.salary = new.salary+(new.salary/100)*5;
+        END IF;
+    END;
+$$
+
+DELIMITER ;
+
+-- Insert multiple rows to demonstrate triggers
+INSERT INTO employee (emp_id, emp_name, salary, start_date, noof_pub, job_d) VALUES
+(1, 'Abdullah', 50000.00, '2022-01-15', 5, 2),
+(2, 'Mohammad', 55000.00, '2021-06-10', 3, 3),
+(3, 'Rahman', 60000.00, '2020-12-20', 7, 3),
+(4, 'Karim', 45000.00, '2023-03-25', 2, 1),
+(5, 'Hossain', 47000.00, '2019-11-05', 4, 4),
+(6, 'Faruk', 52000.00, '2018-09-12', 6, 5),
+(7, 'Alam', 48000.00, '2022-05-22', 1, 2),
+(8, 'Selim', 53000.00, '2021-04-08', 5, 3),
+(9, 'Rabiul', 51000.00, '2023-01-10', 8, 1),
+(10, 'Hasan', 49000.00, '2020-08-18', 3, 4);
+
+
+
+
+-- Select from customers to see the result
+SELECT * FROM employee;
+
+
+DROP DATABASE IF EXISTS lab9;
