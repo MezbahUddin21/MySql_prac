@@ -54,3 +54,77 @@ SELECT * FROM employee;
 
 
 DROP DATABASE IF EXISTS lab9;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP DATABASE IF EXISTS lab9;
+CREATE DATABASE lab9;
+USE lab9;
+
+
+CREATE TABLE employee (
+    emp_id		INT			NOT NULL,
+    emp_name	VARCHAR(30)	NOT NULL,
+    salary	DOUBLE		NOT NULL,
+    start_date		DATE,
+    noof_pub	INT        NOT NULL,
+    PRIMARY KEY (emp_id)
+);
+
+
+
+DELIMITER $$
+
+1. TIMESTAMPDIFF(YEAR, birthdate, CURDATE())
+2. FLOOR(DATEDIFF(CURDATE(), birthdate) / 365.25)
+
+
+-- BEFORE UPDATE Trigger
+CREATE TRIGGER beforeInsertTrigger before insert ON employee FOR EACH ROW
+    BEGIN
+        -- Ensure the salary is at least 1500.00 before updating
+        IF SELECT datediff(year, new.date, GETDATE())>1 AS DateDiff; and new.noof_pub >4 THEN SET NEW.salary = new.salary+(new.salary/100)*20;
+        end if;
+        IF SELECT datediff(year, new.date, GETDATE())>11 and new.noof_pub >3 THEN SET NEW.salary = new.salary+(new.salary/100)*10;
+        end if;
+        IF SELECT datediff(year, new.date, GETDATE())>1 and new.noof_pub >1 THEN SET NEW.salary = new.salary+(new.salary/100)*5;
+        END IF;
+    END;
+$$
+
+DELIMITER ;
+
+-- Insert multiple rows to demonstrate triggers
+INSERT INTO employee (emp_id, emp_name, basic_salary, start_date, noof_pub) VALUES
+(1, 'Abdullah', 50000.00, '2022-01-15', 5),
+(2, 'Mohammad', 55000.00, '2021-06-10', 3),
+(3, 'Rahman', 60000.00, '2020-12-20', 7),
+(4, 'Karim', 45000.00, '2023-03-25', 2),
+(5, 'Hossain', 47000.00, '2019-11-05', 4),
+(6, 'Faruk', 52000.00, '2018-09-12', 6),
+(7, 'Alam', 48000.00, '2022-05-22', 1),
+(8, 'Selim', 53000.00, '2021-04-08', 5),
+(9, 'Rabiul', 51000.00, '2023-01-10', 8),
+(10, 'Hasan', 49000.00, '2020-08-18', 3);
+
+
+
+
+
+-- Select from customers to see the result
+SELECT * FROM employee;
+
+
+DROP DATABASE IF EXISTS lab9;
