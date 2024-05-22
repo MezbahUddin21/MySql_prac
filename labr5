@@ -1,0 +1,36 @@
+drop database customerS;
+create database customerS;
+use customerS;
+
+create table orders(
+	ord_no int PRIMARY key,
+    purch_amt float,
+    ord_date date,
+    customer_id int,
+    salesman_id int
+);
+
+create table customer(
+	customer_id int PRIMARY key,
+    cust_name varchar(20),
+    city varchar(20),
+    gade int,
+    salesman_id int
+);
+
+select 
+    o.ord_no,
+    o.ord_date,
+    c.cust_name,
+    o.salesman_id
+from  orders o
+join   customer c on o.customer_id = c.customer_id;
+
+select cust_name from customer
+where   salesman_id is not null
+order by  cust_name asc;
+    
+select cust_name from  customer
+where  salesman_id is null
+order by   cust_name asc;
+
