@@ -155,9 +155,9 @@ INNER join prescriptions on doctors.doctor_id= prescriptions.doctor_id;
 
 INSERT into patients (patient_id,first_name, last_name, date_of_birth, gender, address, contact_number, email_address) 
 VALUES
-(1,'Abul', 'Hasan', '1980-05-12', 'male', '123 Main St, Dhaka', '01711111111', 'abul.hasan@example.com'),
-(2,'Fatema', 'Begum', '1992-11-22', 'female', '456 Park Ave, Chittagong', '01712222222', 'fatema.begum@example.com'),
-(3,'Karim', 'Uddin', '1985-02-15', 'male', '789 Market Rd, Sylhet', '01713333333', 'karim.uddin@example.com');
+(1,'Abul', 'Hasan', '1980-05-12', 'male', '123 Main St, Dhaka', '01711111111', 'abul.hasan@example.com',0),
+(2,'Fatema', 'Begum', '1992-11-22', 'female', '456 Park Ave, Chittagong', '01712222222', 'fatema.begum@example.com',0),
+(3,'Karim', 'Uddin', '1985-02-15', 'male', '789 Market Rd, Sylhet', '01713333333', 'karim.uddin@example.com',0);
 
 INSERT into doctors (first_name, last_name, specialization, contact_number, email_address) 
 VALUES
@@ -239,7 +239,7 @@ DELIMITER $$
 CREATE TRIGGER update_patient_balance AFTER INSERT ON billing FOR EACH ROW
     BEGIN
         UPDATE patients
-  		SET cost = cost - new.total_bill_amount
+  		SET cost = cost + new.total_bill_amount
   		WHERE patient_id = new.patient_id;
     END;
 $$
