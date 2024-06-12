@@ -1,7 +1,8 @@
 drop DATABASE healthcare;
 create database healthcare;
 use healthcare;
--- create patients table
+
+
 create table patients (
     patient_id int AUTO_INCREMENT primary KEY,
     first_name varchar(30),
@@ -15,7 +16,6 @@ create table patients (
 
 
 
--- create doctors table
 create table doctors (
     doctor_id int AUTO_INCREMENT primary key,
     first_name varchar(30),
@@ -26,7 +26,6 @@ create table doctors (
 );
 
 
--- create medical records table
 create table medicalrecords (
     record_id int auto_increment PRIMARY key,
     patient_id int,
@@ -40,7 +39,6 @@ create table medicalrecords (
 );
 
 
--- create appointments table
 create table appointments (
     appointment_id int AUTO_INCREMENT primary key,
     patient_id int,
@@ -52,7 +50,6 @@ create table appointments (
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
 );
 
--- create prescriptions table
 create table prescriptions (
     prescription_id int AUTO_INCREMENT PRIMARY key,
     patient_id int,
@@ -66,7 +63,6 @@ create table prescriptions (
     foreign key (doctor_id) REFERENCES doctors(doctor_id)
 );
 
--- create lab tests table
 create table labtests (
     test_id int AUTO_INCREMENT PRIMARY key,
     patient_id int,
@@ -79,7 +75,6 @@ create table labtests (
     FOREIGN KEY (doctor_id) references doctors(doctor_id)
 );
 
--- create billing table
 create table billing (
     bill_id int auto_increment primary key,
     patient_id int,
@@ -90,7 +85,6 @@ create table billing (
     foreign key (patient_id) references patients(patient_id)
 );
 
--- create analytics results table
 create table analyticsResults (
     result_id int AUTO_INCREMENT PRIMARY key,
     patient_id int,
@@ -102,7 +96,6 @@ create table analyticsResults (
     FOREIGN KEY (doctor_id) references doctors(doctor_id)
 );
 
--- create administrative staff table
 create table administrativeStaff (
     staff_id int AUTO_INCREMENT PRIMARY key,
     first_name varchar(30),
@@ -122,7 +115,6 @@ create table insuranceDetail (
     FOREIGN key (patient_id) REFERENCES patients(patient_id)
 );
 
--- create patient allergies table
 create table patientAllergies (
     allergy_id int auto_increment primary key,
     patient_id int,
@@ -132,7 +124,6 @@ create table patientAllergies (
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
 );
 
--- create treatment plans table
 create table treatmentPlans (
     plan_id int auto_increment primary key,
     patient_id int,
@@ -145,7 +136,6 @@ create table treatmentPlans (
     FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
 );
 
--- create equipment inventory table
 create table equipmentInventory (
     equipment_id int AUTO_INCREMENT primary key,
     equipment_name varchar(30),
@@ -153,3 +143,81 @@ create table equipmentInventory (
     status enum('available', 'in use', 'maintenance', 'retired'),
     location varchar(30)
 );
+
+INSERT into patients (first_name, last_name, date_of_birth, gender, address, contact_number, email_address) 
+VALUES
+('Abul', 'Hasan', '1980-05-12', 'male', '123 Main St, Dhaka', '01711111111', 'abul.hasan@example.com'),
+('Fatema', 'Begum', '1992-11-22', 'female', '456 Park Ave, Chittagong', '01712222222', 'fatema.begum@example.com'),
+('Karim', 'Uddin', '1985-02-15', 'male', '789 Market Rd, Sylhet', '01713333333', 'karim.uddin@example.com');
+
+INSERT into doctors (first_name, last_name, specialization, contact_number, email_address) 
+VALUES
+('Dr. Ayesha', 'Rahman', 'Cardiology', '01811111111', 'ayesha.rahman@example.com'),
+('Dr. Salman', 'Ahmed', 'Neurology', '01812222222', 'salman.ahmed@example.com'),
+('Dr. Tahmina', 'Chowdhury', 'Pediatrics', '01813333333', 'tahmina.chowdhury@example.com');
+
+INSERT into medicalrecords (patient_id, admission_date, discharge_date, diagnosis, treatment, doctor_id) 
+VALUES
+(1, '2024-01-10', '2024-01-15', 'Heart Attack', 'Angioplasty and medication', 1),
+(2, '2024-02-20', '2024-02-25', 'Stroke', 'Thrombolysis and rehabilitation', 2),
+(3, '2024-03-05', '2024-03-10', 'Pneumonia', 'Antibiotics and supportive care', 3);
+
+INSERT into appointments (patient_id, doctor_id, appointment_date, appointment_time, purpose) 
+VALUES
+(1, 1, '2024-03-01', '09:00:00', 'Follow-up checkup'),
+(2, 2, '2024-03-02', '10:00:00', 'Neurological assessment'),
+(3, 3, '2024-02-03', '11:00:00', 'Child vaccination');
+
+INSERT into prescriptions (patient_id, doctor_id, medication, dosage, frequency, start_date, end_date) 
+VALUES
+(1, 1, 'Aspirin', '75mg', 'Once daily', '2024-01-01', '2024-03-31'),
+(2, 2, 'Atorvastatin', '20mg', 'Once daily', '2024-01-02', '2024-03-31'),
+(3, 3, 'Amoxicillin', '500mg', 'Three times daily', '2024-01-03', '2024-03-10');
+
+INSERT into labtests (patient_id, doctor_id, test_name, test_date, result, normal_range) 
+VALUES
+(1, 1, 'Lipid Profile', '2024-07-01', 'High cholesterol', 'Normal'),
+(2, 2, 'MRI Brain', '2024-07-02', 'Ischemic stroke', 'Normal'),
+(3, 3, 'CBC', '2024-07-03', 'Elevated WBC', 'Normal');
+
+INSERT into billing (patient_id, admission_date, discharge_date, total_bill_amount, payment_status) 
+VALUES
+(1, '2024-01-10', '2024-01-15', 50000.00, 'paid'),
+(2, '2024-02-20', '2024-02-25', 75000.00, 'unpaid'),
+(3, '2024-03-05', '2024-03-10', 30000.00, 'paid');
+
+INSERT into analyticsresults (patient_id, doctor_id, analysis_date, analysis_type, analysis_result) 
+VALUES
+(1, 1, '2024-03-01', 'Heart Risk Analysis', 'High risk due to cholesterol levels'),
+(2, 2, '2024-03-02', 'Stroke Risk Assessment', 'Moderate risk, follow-up needed'),
+(3, 3, '2024-03-03', 'Pediatric Health Analysis', 'Good health, vaccination up to date');
+
+INSERT into administrativestaff (first_name, last_name, position, contact_number, email_address) 
+VALUES
+('Farhana', 'Ahmed', 'Receptionist', '01911111111', 'farhana.ahmed@example.com'),
+('Jamal', 'Uddin', 'Billing Manager', '01912222222', 'jamal.uddin@example.com'),
+('Laila', 'Begum', 'HR Manager', '01913333333', 'laila.begum@example.com');
+
+INSERT into insurancedetails (patient_id, insurance_provider, policy_number, coverage_details) 
+VALUES
+(1, 'Delta Life Insurance', '21', 'Full coverage for hospitalization and treatment'),
+(2, 'Pragati Life Insurance', '22', 'Partial coverage for hospitalization'),
+(3, 'Jiban Bima Corporation', '23', 'Full coverage for outpatient services');
+
+INSERT into patientallergies (patient_id, allergy_name, severity, reaction_description) 
+VALUES
+(1, 'Peanuts', 'severe', 'Anaphylaxis'),
+(2, 'Penicillin', 'moderate', 'Rash and itching'),
+(3, 'Dust Mites', 'mild', 'Sneezing and runny nose');
+
+INSERT into treatmentplans (patient_id, doctor_id, plan_description, start_date, end_date, status) 
+VALUES
+(1, 1, 'Cardiac rehabilitation and lifestyle changes', '2024-01-01', '2024-4-31', 'active'),
+(2, 2, 'Neurological therapy and medication', '2024-01-02', '2024-4-31', 'active'),
+(3, 3, 'Antibiotic therapy and follow-up', '2024-01-03', '2024-5-10', 'completed');
+
+INSERT into equipmentinventory (equipment_name, quantity, status, location) 
+VALUES
+('ECG Machine', 10, 'available', 'Cardiology Department'),
+('MRI Scanner', 2, 'in use', 'Radiology Department'),
+('Ventilator', 5, 'maintenance', 'ICU');
