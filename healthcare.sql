@@ -26,7 +26,7 @@ create table doctors (
 );
 
 
-create table medicalrecords (
+create table medicalRecords (
     record_id int auto_increment PRIMARY key,
     patient_id int,
     admission_date date,
@@ -156,7 +156,7 @@ VALUES
 ('Dr. Salman', 'Ahmed', 'Neurology', '01812222222', 'salman.ahmed@example.com'),
 ('Dr. Tahmina', 'Chowdhury', 'Pediatrics', '01813333333', 'tahmina.chowdhury@example.com');
 
-INSERT into medicalrecords (patient_id, admission_date, discharge_date, diagnosis, treatment, doctor_id) 
+INSERT into medicalRecords (patient_id, admission_date, discharge_date, diagnosis, treatment, doctor_id) 
 VALUES
 (1, '2024-01-10', '2024-01-15', 'Heart Attack', 'Angioplasty and medication', 1),
 (2, '2024-02-20', '2024-02-25', 'Stroke', 'Thrombolysis and rehabilitation', 2),
@@ -186,37 +186,37 @@ VALUES
 (2, '2024-02-20', '2024-02-25', 75000.00, 'unpaid'),
 (3, '2024-03-05', '2024-03-10', 30000.00, 'paid');
 
-INSERT into analyticsresults (patient_id, doctor_id, analysis_date, analysis_type, analysis_result) 
+INSERT into analyticsResults (patient_id, doctor_id, analysis_date, analysis_type, analysis_result) 
 VALUES
 (1, 1, '2024-03-01', 'Heart Risk Analysis', 'High risk due to cholesterol levels'),
 (2, 2, '2024-03-02', 'Stroke Risk Assessment', 'Moderate risk, follow-up needed'),
 (3, 3, '2024-03-03', 'Pediatric Health Analysis', 'Good health, vaccination up to date');
 
-INSERT into administrativestaff (first_name, last_name, position, contact_number, email_address) 
+INSERT into administrativeStaff (first_name, last_name, position, contact_number, email_address) 
 VALUES
 ('Farhana', 'Ahmed', 'Receptionist', '01911111111', 'farhana.ahmed@example.com'),
 ('Jamal', 'Uddin', 'Billing Manager', '01912222222', 'jamal.uddin@example.com'),
 ('Laila', 'Begum', 'HR Manager', '01913333333', 'laila.begum@example.com');
 
-INSERT into insurancedetails (patient_id, insurance_provider, policy_number, coverage_details) 
+INSERT into insuranceDetail (patient_id, insurance_provider, policy_number, coverage_details) 
 VALUES
 (1, 'Delta Life Insurance', '21', 'Full coverage for hospitalization and treatment'),
 (2, 'Pragati Life Insurance', '22', 'Partial coverage for hospitalization'),
 (3, 'Jiban Bima Corporation', '23', 'Full coverage for outpatient services');
 
-INSERT into patientallergies (patient_id, allergy_name, severity, reaction_description) 
+INSERT into patientAllergies (patient_id, allergy_name, severity, reaction_description) 
 VALUES
 (1, 'Peanuts', 'severe', 'Anaphylaxis'),
 (2, 'Penicillin', 'moderate', 'Rash and itching'),
 (3, 'Dust Mites', 'mild', 'Sneezing and runny nose');
 
-INSERT into treatmentplans (patient_id, doctor_id, plan_description, start_date, end_date, status) 
+INSERT into treatmentPlans (patient_id, doctor_id, plan_description, start_date, end_date, status) 
 VALUES
 (1, 1, 'Cardiac rehabilitation and lifestyle changes', '2024-01-01', '2024-4-31', 'active'),
 (2, 2, 'Neurological therapy and medication', '2024-01-02', '2024-4-31', 'active'),
 (3, 3, 'Antibiotic therapy and follow-up', '2024-01-03', '2024-5-10', 'completed');
 
-INSERT into equipmentinventory (equipment_name, quantity, status, location) 
+INSERT into equipmentInventory (equipment_name, quantity, status, location) 
 VALUES
 ('ECG Machine', 10, 'available', 'Cardiology Department'),
 ('MRI Scanner', 2, 'in use', 'Radiology Department'),
