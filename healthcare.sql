@@ -239,8 +239,8 @@ DELIMITER $$
 CREATE TRIGGER update_patient_balance AFTER INSERT ON billing FOR EACH ROW
     BEGIN
         UPDATE patients
-  		SET patients.cost = patients.cost - new.total_bill_amount
-  		WHERE patients.patient_id = new.patient_id;
+  		SET cost = cost - new.total_bill_amount
+  		WHERE patient_id = new.patient_id;
     END;
 $$
 
