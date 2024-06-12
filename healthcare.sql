@@ -153,7 +153,7 @@ INNER join prescriptions on doctors.doctor_id= prescriptions.doctor_id;
 
 
 
-INSERT into patients (patient_id,first_name, last_name, date_of_birth, gender, address, contact_number, email_address) 
+INSERT into patients (patient_id,first_name, last_name, date_of_birth, gender, address, contact_number, email_address,cost) 
 VALUES
 (1,'Abul', 'Hasan', '1980-05-12', 'male', '123 Main St, Dhaka', '01711111111', 'abul.hasan@example.com',0),
 (2,'Fatema', 'Begum', '1992-11-22', 'female', '456 Park Ave, Chittagong', '01712222222', 'fatema.begum@example.com',0),
@@ -191,9 +191,9 @@ VALUES
 
 INSERT into billing (patient_id, admission_date, discharge_date, total_bill_amount, payment_status) 
 VALUES
-(1, '2024-01-10', '2024-01-15', 50000.00, 'paid'),
-(2, '2024-02-20', '2024-02-25', 75000.00, 'unpaid'),
-(3, '2024-03-05', '2024-03-10', 30000.00, 'paid');
+(4, '2024-01-10', '2024-01-15', 50000.00, 'paid'),
+(5, '2024-02-20', '2024-02-25', 75000.00, 'unpaid'),
+(6, '2024-03-05', '2024-03-10', 30000.00, 'paid');
 
 INSERT into analyticsResults (patient_id, doctor_id, analysis_date, analysis_type, analysis_result) 
 VALUES
