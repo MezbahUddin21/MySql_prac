@@ -11,7 +11,8 @@ create table patients (
     gender enum('male', 'female'),
     address varchar(30),
     contact_number varchar(30),
-    email_address varchar(30)
+    email_address varchar(30),
+    cost int
 );
 
 
@@ -144,6 +145,14 @@ create table equipmentInventory (
     location varchar(30)
 );
 
+select patients.first_name,patients.last_name,appointments.appointment_date, appointments.appointment_time from patients
+inner JOIN appointments on patients.patient_id =appointments.patient_id;
+
+select doctors.first_name, doctors.last_name,prescriptions.medication,prescriptions.dosage from doctors
+INNER join prescriptions on doctors.doctor_id= prescriptions.doctor_id;
+
+
+
 INSERT into patients (first_name, last_name, date_of_birth, gender, address, contact_number, email_address) 
 VALUES
 ('Abul', 'Hasan', '1980-05-12', 'male', '123 Main St, Dhaka', '01711111111', 'abul.hasan@example.com'),
@@ -226,12 +235,12 @@ VALUES
 DELIMITER $$
 
 
--- BEFORE UPDATE Trigger
+-- after update trigger for billing
 CREATE TRIGGER update_patient_balance AFTER INSERT ON billing FOR EACH ROW
     BEGIN
         UPDATE patients
-  		SET balance = balance - new.total_bill_amount
-  		WHERE patient_id = new.patient_id;
+  		SET patients.cost = patients.cost - new.total_bill_amount
+  		WHERE patients.patient_id = new.patient_id;
     END;
 $$
 
