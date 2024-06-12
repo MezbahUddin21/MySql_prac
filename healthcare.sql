@@ -221,3 +221,18 @@ VALUES
 ('ECG Machine', 10, 'available', 'Cardiology Department'),
 ('MRI Scanner', 2, 'in use', 'Radiology Department'),
 ('Ventilator', 5, 'maintenance', 'ICU');
+
+
+DELIMITER $$
+
+
+-- BEFORE UPDATE Trigger
+CREATE TRIGGER update_patient_balance AFTER INSERT ON billing FOR EACH ROW
+    BEGIN
+        UPDATE patients
+  		SET balance = balance - new.total_bill_amount
+  		WHERE patient_id = new.patient_id;
+    END;
+$$
+
+DELIMITER ;
